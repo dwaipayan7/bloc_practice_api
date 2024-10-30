@@ -9,9 +9,8 @@ part 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   PostsBloc() : super(PostsInitial()) {
-
     on<PostInitialFetchEvent>(postInitialFetchEvent);
-    
+    on<PostAddEvent>(postAddEvent);
   }
 
   Future<void> postInitialFetchEvent(
@@ -32,4 +31,18 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   }
 
+
+  Future<void> postAddEvent(PostAddEvent event,
+      Emitter<PostsState> emit) async{
+
+    bool success = await PostsRepo.addPost();
+    print(success.toString());
+    if(success){
+    emit(PostsAdditionSuccessState());
+    }else{
+    emit(PostsAdditionErrorState());
+    }
+
+
+  }
 }

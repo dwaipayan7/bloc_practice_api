@@ -31,4 +31,34 @@ class PostsRepo{
       return [];
     }
   }
+
+
+  static Future<bool> addPost() async {
+    var client = http.Client();
+
+    try {
+      var response = await client.post(
+        Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+        body: {
+          "title": "Dwaipayan",
+          "body": "I'm a flutter developer",
+          "userId": "34", // Convert userId to string
+        },
+      );
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return true;
+      } else {
+        print("Failed with status code: ${response.statusCode}");
+        return false;
+      }
+
+    } catch (e) {
+      print(e.toString());
+      return false;
+    } finally {
+      client.close();
+    }
+  }
+
 }

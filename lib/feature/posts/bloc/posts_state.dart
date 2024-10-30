@@ -21,3 +21,7 @@ class PostFetchingErrorState extends PostsState{
 
   PostFetchingErrorState(this.errorMessage);
 }
+
+class PostsAdditionSuccessState extends PostActionState{}
+
+class PostsAdditionErrorState extends PostActionState{}

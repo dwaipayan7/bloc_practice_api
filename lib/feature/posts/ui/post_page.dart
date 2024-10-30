@@ -31,6 +31,11 @@ class _PostPageState extends State<PostPage> {
         elevation: 4,
         backgroundColor: Colors.blueAccent,
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: (){
+        context.read<PostsBloc>().add(PostAddEvent());
+      }),
       body: BlocConsumer<PostsBloc, PostsState>(
         listenWhen: (previous, current) => current is PostActionState,
         buildWhen: (previous, current) => current is !PostActionState,

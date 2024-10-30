@@ -5,3 +5,5 @@ sealed class PostsEvent {}
 
 class PostInitialFetchEvent extends PostsEvent{}
 
+
+class PostAddEvent extends PostsEvent{}
