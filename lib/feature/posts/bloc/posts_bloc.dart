@@ -12,7 +12,9 @@ part 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   PostsBloc() : super(PostsInitial()) {
-   
+
+    
+
     on<PostInitialFetchEvent>(postInitialFetchEvent);
     
   }
@@ -20,6 +22,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
   Future<void> postInitialFetchEvent(
       PostInitialFetchEvent event,
       Emitter<PostsState> emit) async{
+
+    emit(PostFetchingLoadingState());
 
     var client = http.Client();
     List<PostDataUiModel> posts = [];
@@ -40,7 +44,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
 
     }catch(e){
-        print(e.toString());
+      emit(PostFetchingErrorState(e.toString()));
+        // print(e.toString());
     }
 
   }
