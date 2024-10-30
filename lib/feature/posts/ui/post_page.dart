@@ -17,11 +17,12 @@ class _PostPageState extends State<PostPage> {
     super.initState();
     context.read<PostsBloc>().add(PostInitialFetchEvent());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Posts",
+        title: const Text("Posts",
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold
@@ -29,6 +30,39 @@ class _PostPageState extends State<PostPage> {
         centerTitle: true,
         elevation: 4,
         backgroundColor: Colors.blueAccent,
+      ),
+      body: BlocConsumer<PostsBloc, PostsState>(
+        listenWhen: (previous, current) => current is PostActionState,
+        buildWhen: (previous, current) => current is !PostActionState,
+        listener: (context, state) {
+
+        },
+        builder: (context, state) {
+
+          switch(state.runtimeType){
+
+            case PostFetchingSuccessfulState:
+              final successState = state as PostFetchingSuccessfulState;
+              return Container(
+                child: ListView.builder(
+                    itemCount: successState.posts.length,
+                    itemBuilder: (context, index){
+                      return Container(
+                        child: Column(
+                          children: [
+                            Text(successState.posts[index].title)
+                          ],
+                        ),
+                      );
+                    }),
+              );
+
+            default: SizedBox();
+
+          }
+
+          return SizedBox();
+        },
       ),
     );
   }
