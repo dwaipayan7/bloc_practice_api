@@ -1,4 +1,3 @@
-import 'package:bloc_practice_api/feature/home/home_page.dart';
 import 'package:bloc_practice_api/feature/posts/bloc/posts_bloc.dart';
 import 'package:bloc_practice_api/feature/posts/ui/post_page.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +24,8 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: PostPage(),
-        ),
+          home: const PostPage(),
+      ),
     );
   }
 }

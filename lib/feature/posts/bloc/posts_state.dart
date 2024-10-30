@@ -13,3 +13,11 @@ class PostFetchingSuccessfulState extends PostsState{
 
   PostFetchingSuccessfulState(this.posts);
 }
+
+class PostFetchingLoadingState extends PostsState{}
+
+class PostFetchingErrorState extends PostsState{
+  final String errorMessage;
+
+  PostFetchingErrorState(this.errorMessage);
+}

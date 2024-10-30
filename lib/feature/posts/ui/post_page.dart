@@ -41,27 +41,32 @@ class _PostPageState extends State<PostPage> {
 
           switch(state.runtimeType){
 
+            case PostFetchingLoadingState:
+              return const Center(child: CircularProgressIndicator.adaptive(),);
+
             case PostFetchingSuccessfulState:
               final successState = state as PostFetchingSuccessfulState;
-              return Container(
-                child: ListView.builder(
-                    itemCount: successState.posts.length,
-                    itemBuilder: (context, index){
-                      return Container(
-                        child: Column(
-                          children: [
-                            Text(successState.posts[index].title)
-                          ],
-                        ),
-                      );
-                    }),
-              );
+              return ListView.builder(
+                  itemCount: successState.posts.length,
+                  itemBuilder: (context, index){
+                    return Container(
+                      color: Colors.grey[300],
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(successState.posts[index].title)
+                        ],
+                      ),
+                    );
+                  });
 
-            default: SizedBox();
+            default: const SizedBox();
 
           }
 
-          return SizedBox();
+          return const SizedBox();
         },
       ),
     );
